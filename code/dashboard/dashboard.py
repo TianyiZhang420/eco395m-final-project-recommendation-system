@@ -25,7 +25,6 @@ min_price, max_price = st.slider(
     value=(org_min_price, org_max_price)
 )
 
-
 # List of Skin Tone and Skin Type
 skin_tone = ["These", "are", "test", "words"]
 skin_type = ["These", "are", "test", "words"]
@@ -41,4 +40,14 @@ product_description = st.text_input("Describe the product you are looking for:")
 wanted_ingredients = st.text_input("What are some ingredients you want in the product? If multiple ones, separate by commas; Otherwise, leave it blank:")
 unwanted_ingredients = st.text_input("What are some ingredients you do not want in the product? If multiple ones, separate by commas; Otherwise, leave it blank:")
 
-st.write(f"The best fit {selected_type} for you is   . Here is the [link](https://www.openai.com) to the product. Thank you for using our App!")
+# Display the output
+if selected_type == "Select an option" or selected_skin_tone == "Select an option" or selected_skin_type == "Select an option" or product_description == '':
+    st.warning("Please fill in all information to see the results.")
+else:
+    #result_df from filtering function
+    if result_df.empty:
+        st.write("No matched product. Please modify your inputs and try again.")
+    else:
+        #result product from recommendation model
+        st.write(f"The best fit {selected_type} for you is   . Here is the [link](https://www.openai.com) to the product. Thank you for using our App!")
+    
