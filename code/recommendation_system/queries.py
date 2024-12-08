@@ -27,6 +27,7 @@ query_5 = """SELECT
     p.longdescription,
     p.quicklookdescription,
     p.rating AS productrating,
+    p.fullsiteproducturl,
     r.reviewtext,
     r.title,
     r.rating AS userrating,    
