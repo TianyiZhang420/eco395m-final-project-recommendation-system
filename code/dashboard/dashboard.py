@@ -11,7 +11,7 @@ st.image("image/sephora.jpg", use_column_width=True)
 # Dashboard Title
 st.title("💄Sephora Product Finder")
 
-# List of product type
+# List of product category
 product_category = pd.read_sql_query(query_1, engine)['categoryid'].tolist()
 
 # Filter to select a product type
@@ -47,7 +47,7 @@ if selected_product_category == "Select an option" or selected_skin_tone == "Sel
     st.warning("Please fill in all information to see the results.")
 else:
     result_df = get_filtered_products(query_5, 
-                                      product_category, 
+                                      selected_product_category, 
                                       min_price, 
                                       max_price, 
                                       engine, 
