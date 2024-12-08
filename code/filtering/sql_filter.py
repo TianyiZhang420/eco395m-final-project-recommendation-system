@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def get_unique_values(query, engine):
     """
     Fetch unique values from the database.
@@ -11,12 +12,14 @@ def get_unique_values(query, engine):
     Returns:
     list: A list of unique values.
     """
-    
+
     # Execute query and load results into a DataFrame
     df = pd.read_sql_query(query, engine)
-    
+
     # Extract unique values and return as a list
-    unique_values = df.iloc[:, 0].dropna().unique().tolist()  # Assumes the skinType or skinTone is the first column
+    unique_values = (
+        df.iloc[:, 0].dropna().unique().tolist()
+    )  # Assumes the skinType or skinTone is the first column
     return unique_values
 
 
@@ -33,9 +36,9 @@ def get_products_and_reviews(query, category, min_price, max_price, engine):
     Returns:
     pd.DataFrame: A DataFrame containing the filtered products and reviews.
     """
-    
+
     # Execute the query with parameters
     params = {"category": category, "min_price": min_price, "max_price": max_price}
     result = pd.read_sql_query(query, engine, params=params)
-    
+
     return result

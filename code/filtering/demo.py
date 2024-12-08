@@ -20,7 +20,7 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 
 # query = """
-# SELECT * 
+# SELECT *
 # FROM product_reviews
 # """
 # with engine.connect() as connection:
@@ -34,24 +34,35 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL)
 # print(result_df)
 
 
-category=pd.read_sql_query(query_1,engine)['categoryid'].tolist()
-skintype=pd.read_sql_query(query_2,engine)['skintype'].tolist()
-skintone=pd.read_sql_query(query_3,engine)['skintone'].tolist()
+categories = pd.read_sql_query(query_1, engine)["categoryid"].tolist()
+maxprice = pd.read_sql_query(query_2, engine)["maxprice"].tolist()[0]
+minprice = pd.read_sql_query(query_2, engine)["minprice"].tolist()[0]
+skintype = pd.read_sql_query(query_3, engine)["skintype"].tolist()
+skintone = pd.read_sql_query(query_4, engine)["skintone"].tolist()
 
 # df=get_products_and_reviews(text(query_4),'concealer',5,50,engine)
 
-category='concealer'
-min_price=5
-max_price=50
-user_skintype='combination'
-user_skintone='medium'
-wanted_ingredients='Omegas 3,vitamin'
-unwanted_ingredients='acid'
+category = "concealer"
+min_price = 5
+max_price = 50
+user_skintype = "combination"
+user_skintone = "medium"
+wanted_ingredients = "Omegas 3,vitamin"
+unwanted_ingredients = "acid"
 
 # df_after_ingredients_filter=filter_by_ingredients(df,user_ingredients,'ingredientdesc')
 # df_after_skin_filter=filter_reviews_by_skin(df,user_skintype,user_skintone)
 
 
-cleaned_df=get_filtered_products(query_4,category,min_price,max_price,engine,user_skintype,user_skintone,wanted_ingredients,unwanted_ingredients)
+cleaned_df = get_filtered_products(
+    query_5,
+    category,
+    min_price,
+    max_price,
+    engine,
+    user_skintype,
+    user_skintone,
+    wanted_ingredients,
+    unwanted_ingredients,
+)
 print(cleaned_df)
-
