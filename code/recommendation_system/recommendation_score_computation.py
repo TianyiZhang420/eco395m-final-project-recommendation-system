@@ -3,82 +3,84 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-# user's info
-user_df = pd.read_csv("user_data.csv")
-# Test with the first data
-user1 = user_df.iloc[0]
+def recommend_products(user_info, product_info):
+    """
+    Recommend products based on user description and product reviews.
 
-# Review data after matching with user input and filtering
+    Args:
+        user_info (dict): A dictionary containing user details, including a "description" key.
+        product_info (pd.DataFrame): A DataFrame with product information,
+                                     including "productid", "reviewtext", and "productrating" columns.
 
-review_df_1 = pd.read_csv("output.csv")
-review_df_1 = review_df_1.drop_duplicates()
+    Returns:
+        pd.DataFrame: A DataFrame with the ranked product recommendations.
+    """
 
+    def get_embeddings(model, df):
+        if isinstance(df, str):
+            lst = [df]
+        else:
+            lst = df.tolist()
+        return model.encode(lst)
 
-# Compute embeddings
-def get_embeddings(model, df):
-    if isinstance(df, str):
-        lst = [df]
-    else:
-        lst = df.tolist()
-    return model.encode(lst)
+    def final_score(similarity, rating):
+        return similarity * rating
 
-
-# Compute the cosine similarity of the first sample user data with all the selected products' reviews
-
-
-def final_score(similarity, rating):
-    return similarity * rating
-
-
-def calculate_individual_similarities(user_info, product_info):
-    detailed_scores = {}
+    # Initialize the model
     model = SentenceTransformer("all-MiniLM-L6-v2")
 
-    # get embeddings of user description and reviews of products
-    requirements_embeddings = get_embeddings(model, user_info["description"])
-    review_embeddings = get_embeddings(model, product_info["reviewtext"])
+    # Compute embeddings for user description and product reviews
+    user_embeddings = get_embeddings(model, user_info["description"])
+    product_reviews_embeddings = get_embeddings(model, product_info["reviewtext"])
 
+    # Create a dictionary mapping product IDs to their embeddings
     product_embedding_dict = {
         product_id: embedding
-        for product_id, embedding in zip(product_info["productid"], review_embeddings)
+        for product_id, embedding in zip(
+            product_info["productid"], product_reviews_embeddings
+        )
     }
 
-    # computing similarity scores
-    for product_id, review_embs in product_embedding_dict.items():
+    # Calculate similarity scores and weighted scores
+    detailed_scores = {}
+    for product_id, review_emb in product_embedding_dict.items():
+        similarity_score = cosine_similarity(
+            user_embeddings.reshape(1, -1), review_emb.reshape(1, -1)
+        )[0][0]
 
-        scores = cosine_similarity(
-            requirements_embeddings.reshape(1, -1), review_embs.reshape(1, -1)
-        )
-        scaled_product_rating = product_info.loc[
+        product_rating = product_info.loc[
             product_info["productid"] == product_id, "productrating"
         ].iloc[0]
 
-        detailed_scores[product_id] = final_score(scores[0][0], scaled_product_rating)
+        detailed_scores[product_id] = final_score(similarity_score, product_rating)
 
-    # Ranking and select top5
-    ranked_dict = dict(
-        sorted(detailed_scores.items(), key=lambda item: item[1], reverse=True)
+    # Rank products by scores
+    ranked_products = sorted(
+        detailed_scores.items(), key=lambda item: item[1], reverse=True
     )
+
+    # Create a ranked DataFrame
     ranked_list = []
-    for rank, (key, value) in enumerate(ranked_dict.items(), start=1):
-        # Fetch product details from review_df_1
+    for rank, (product_id, score) in enumerate(ranked_products, start=1):
         product_details = (
-            product_info.loc[product_info["productid"] == key].iloc[0].to_dict()
+            product_info.loc[product_info["productid"] == product_id].iloc[0].to_dict()
         )
         product_details["Rank"] = rank
-        product_details["Score"] = value
+        product_details["Score"] = score
         ranked_list.append(product_details)
 
-    # Convert the list of product details to a DataFrame
-    ranked_df = pd.DataFrame(ranked_list)
-
-    # Sort the DataFrame by rank (if necessary, though it's already sorted by enumerate)
-    ranked_df = ranked_df.sort_values("Rank", ascending=True)
+    ranked_df = pd.DataFrame(ranked_list).sort_values("Rank", ascending=True)
 
     return ranked_df
 
 
+# Testing with user_info and review
+user_df = pd.read_csv("user_data_test_samples.csv")
+user1 = user_df.iloc[0]
+review_df_1 = pd.read_csv("output_review_test_samples.csv")
+review_df_1 = review_df_1.drop_duplicates()
+
 # Display the ranked DataFrame
-ranked_df = calculate_individual_similarities(user1, review_df_1)
+ranked_df = recommend_products(user1, review_df_1)
 
 print(ranked_df.head())
