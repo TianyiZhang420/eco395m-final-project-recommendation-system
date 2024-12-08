@@ -25,4 +25,4 @@ min_price, max_price = st.slider(
 # Textbox for product description
 product_description = st.text_input("Describe the product you are looking for:")
 
-st.write(f"The best fit {selected_type} for you is   . Here is the [link](https://www.openai.com) to the product. Thank you for using our App!")
+st.write(f"The best fit {selected_type} for you is . Here is the [link](https://www.openai.com) to the product. Thank you for using our App!")
