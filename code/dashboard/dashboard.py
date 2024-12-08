@@ -3,6 +3,9 @@ import pandas as pd
 import streamlit as st
 
 
+# Background Image
+st.image("sephora.jpg", use_column_width=True)
+
 # Dashboard Title
 st.title("💄Sephora Product Finder")
 
@@ -25,4 +28,14 @@ min_price, max_price = st.slider(
 # Textbox for product description
 product_description = st.text_input("Describe the product you are looking for:")
 
-st.write(f"The best fit {selected_type} for you is  . Here is the [link](https://www.openai.com) to the product. Thank you for using our App!")
+# List of Skin Tone and Skin Type
+skin_tone = ["These", "are", "test", "words"]
+skin_type = ["These", "are", "test", "words"]
+
+# Filter to select a skin tone
+selected_skin_tone = st.selectbox("Select your skin tone:", options=["Select an option"] + skin_tone)
+
+# Filter to select a skin type
+selected_skin_type = st.selectbox("Select your skin type:", options=["Select an option"] + skin_type)
+
+st.write(f"The best fit {selected_type} for you is   . Here is the [link](https://www.openai.com) to the product. Thank you for using our App!")
