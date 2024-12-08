@@ -23,8 +23,14 @@ def recommend_products(user_des, product_info):
             lst = df.tolist()
         return model.encode(lst)
 
-    def final_score(similarity, rating):
-        return similarity * rating
+    def final_score(similarity, rating, w1, w2, alpha, beta):
+        # Penalize low similarity and low rating
+        adjusted_similarity = similarity**beta
+        adjusted_rating = rating**alpha
+
+        # Set weights to similarity and rating
+        final_score = w1 * adjusted_similarity + w2 * adjusted_rating
+        return final_score
 
     # Initialize the model
     model = SentenceTransformer("all-MiniLM-L6-v2")
@@ -48,11 +54,17 @@ def recommend_products(user_des, product_info):
             user_embeddings.reshape(1, -1), review_emb.reshape(1, -1)
         )[0][0]
 
-        product_rating = product_info.loc[
-            product_info["productid"] == product_id, "productrating"
-        ].iloc[0]
+        # scale product rating to [0,1]
+        product_rating = (
+            product_info.loc[
+                product_info["productid"] == product_id, "productrating"
+            ].iloc[0]
+            / 5
+        )
 
-        detailed_scores[product_id] = final_score(similarity_score, product_rating)
+        detailed_scores[product_id] = final_score(
+            similarity_score, product_rating, 0.7, 0.3, 0.8, 0.8
+        )
 
     # Rank products by scores
     ranked_products = sorted(
