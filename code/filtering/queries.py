@@ -1,16 +1,16 @@
-query_1="""SELECT DISTINCT categoryid
+query_1 = """SELECT DISTINCT categoryid
 FROM product_info
 WHERE categoryid IS NOT NULL;"""
 
-query_2="""SELECT DISTINCT skintype
+query_2 = """SELECT DISTINCT skintype
 FROM product_reviews
 WHERE skintype IS NOT NULL;"""
 
-query_3="""SELECT DISTINCT skintone
+query_3 = """SELECT DISTINCT skintone
 FROM product_reviews
 WHERE skintone IS NOT NULL;"""
 
-query_4="""SELECT 
+query_4 = """SELECT 
     p.categoryid,
     p.brandname,
     p.displayname,
@@ -39,4 +39,8 @@ WHERE
     AND p.listprice <= :max_price;"""
 
 
-
+query_5 = """SELECT 
+    MAX(listprice) AS maxprice,
+    MIN(listprice) AS minprice
+FROM 
+    product_info;"""
