@@ -47,18 +47,26 @@ unwanted_ingredients = st.text_input("What are some ingredients you do not want 
 if selected_product_category == "Select an option" or user_skintone == "Select an option" or user_skintype == "Select an option" or product_description == '':
     st.warning("Please fill in all information to see the results.")
 else:
-    result_df = get_filtered_products(query_5, 
-                                      selected_product_category, 
-                                      min_price, 
-                                      max_price, 
-                                      engine, 
-                                      user_skintype, 
-                                      user_skintone, 
-                                      wanted_ingredients, 
-                                      unwanted_ingredients)
+    result_df = get_filtered_products(
+        query_5, 
+        selected_product_category, 
+        min_price, 
+        max_price, 
+        engine, 
+        user_skintype, 
+        user_skintone, 
+        wanted_ingredients, 
+        unwanted_ingredients
+    )
     if result_df.empty:
         st.write("No matched product. Please modify your inputs and try again.")
     else:
         ranked_df = recommend_products(product_description, result_df)
-        st.write(f"The best fit {selected_product_category} for you is {ranked_df['brandname'].iloc[0]}. Here is the [link]({ranked_df['fullSiteProductUrl'].iloc[0]}) to the product. Thank you for using our App!")
+        st.markdown(f"### The top 5 {selected_product_category} for you:")
+        for index, row in ranked_df.head(5).iterrows():
+            st.markdown(f"- **{row['displayname']}**: [View Product]({row['fullsiteproducturl']})")
+        st.markdown("Thank you for using our App!")
+
+
+
     
