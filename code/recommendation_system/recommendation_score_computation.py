@@ -3,12 +3,12 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def recommend_products(user_info, product_info):
+def recommend_products(user_des, product_info):
     """
     Recommend products based on user description and product reviews.
 
     Args:
-        user_info (dict): A dictionary containing user details, including a "description" key.
+        user_des (string): A string containing user's description of the product.
         product_info (pd.DataFrame): A DataFrame with product information,
                                      including "productid", "reviewtext", and "productrating" columns.
 
@@ -30,7 +30,7 @@ def recommend_products(user_info, product_info):
     model = SentenceTransformer("all-MiniLM-L6-v2")
 
     # Compute embeddings for user description and product reviews
-    user_embeddings = get_embeddings(model, user_info["description"])
+    user_embeddings = get_embeddings(model, user_des)
     product_reviews_embeddings = get_embeddings(model, product_info["reviewtext"])
 
     # Create a dictionary mapping product IDs to their embeddings
@@ -72,15 +72,3 @@ def recommend_products(user_info, product_info):
     ranked_df = pd.DataFrame(ranked_list).sort_values("Rank", ascending=True)
 
     return ranked_df
-
-
-# Testing with user_info and review
-user_df = pd.read_csv("user_data_test_samples.csv")
-user1 = user_df.iloc[0]
-review_df_1 = pd.read_csv("output_review_test_samples.csv")
-review_df_1 = review_df_1.drop_duplicates()
-
-# Display the ranked DataFrame
-ranked_df = recommend_products(user1, review_df_1)
-
-print(ranked_df.head())
