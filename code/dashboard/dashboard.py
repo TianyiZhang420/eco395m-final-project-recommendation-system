@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-from code.filtering.queries import *
-from code.filtering.get_cleaned_df import get_filtered_products
+from filtering.queries import *
+from filtering.get_cleaned_df import get_filtered_products
 
 
 # Background Image
