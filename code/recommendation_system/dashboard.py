@@ -1,8 +1,8 @@
-import numpy as np
 import pandas as pd
 import streamlit as st
-from filtering.queries import *
-from filtering.get_cleaned_df import get_filtered_products
+from database import engine
+from queries import *
+from get_cleaned_df import get_filtered_products
 
 
 # Background Image
@@ -28,8 +28,8 @@ min_price, max_price = st.slider(
 )
 
 # List of Skin Tone and Skin Type
-skin_tone = pd.read_sql_query(query_3, engine)['skintone'].tolist()
-skin_type = pd.read_sql_query(query_4, engine)['skintype'].tolist()
+skin_tone = pd.read_sql_query(query_4, engine)['skintone'].tolist()
+skin_type = pd.read_sql_query(query_3, engine)['skintype'].tolist()
 
 # Filter to select a skin tone and a skin type
 user_skintone = st.selectbox("Select your skin tone:", options=["Select an option"] + skin_tone)
