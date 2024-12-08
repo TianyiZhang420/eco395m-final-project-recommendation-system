@@ -3,10 +3,11 @@ import streamlit as st
 from database import engine
 from queries import *
 from get_cleaned_df import get_filtered_products
+from recommendation_score_computation import recommend_products
 
 
 # Background Image
-st.image("image/sephora.jpg", use_column_width=True)
+st.image("image/sephora.jpg", use_container_width=True)
 
 # Dashboard Title
 st.title("💄Sephora Product Finder")
@@ -58,6 +59,6 @@ else:
     if result_df.empty:
         st.write("No matched product. Please modify your inputs and try again.")
     else:
-        #result product from recommendation model
-        st.write(f"The best fit {selected_product_category} for you is   . Here is the [link](https://www.openai.com) to the product. Thank you for using our App!")
+        ranked_df = recommend_products(product_description, result_df)
+        st.write(f"The best fit {selected_product_category} for you is {ranked_df['brandname'].iloc[0]}. Here is the [link]({ranked_df['fullSiteProductUrl'].iloc[0]}) to the product. Thank you for using our App!")
     
