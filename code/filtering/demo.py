@@ -26,8 +26,6 @@ minprice = pd.read_sql_query(query_2, engine)["minprice"].tolist()[0]
 skintype = pd.read_sql_query(query_3, engine)["skintype"].tolist()
 skintone = pd.read_sql_query(query_4, engine)["skintone"].tolist()
 
-
-
 category = "concealer"
 min_price = 5
 max_price = 50
