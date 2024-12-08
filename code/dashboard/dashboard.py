@@ -43,7 +43,7 @@ wanted_ingredients = st.text_input("What are some ingredients you want in the pr
 unwanted_ingredients = st.text_input("What are some ingredients you do not want in the product? If multiple ones, separate by commas; Otherwise, leave it blank:")
 
 # Display the output
-if selected_product_category == "Select an option" or selected_skin_tone == "Select an option" or selected_skin_type == "Select an option" or product_description == '':
+if selected_product_category == "Select an option" or user_skintone == "Select an option" or user_skintype == "Select an option" or product_description == '':
     st.warning("Please fill in all information to see the results.")
 else:
     result_df = get_filtered_products(query_5, 
