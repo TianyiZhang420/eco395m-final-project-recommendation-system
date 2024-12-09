@@ -12,7 +12,7 @@ Some dashboard highlights are as follows:
 1. Users can select a product category, specify a desired price range, choose a skin tone and skin type, and provide a short description of their desired product. They may also optionally input wanted and unwanted ingredients.
 2. All filters must be completed for users to proceed to the recommendation step. If any required filter is missing, a warning message will be displayed.
 3. Based on the user's selections, SQL queries will be executed to search the database for products that meet all the specified criteria. If no matching products are found, users will be prompted to modify their selections.
-4. If products meeting the initial requirements are found, their details, along with the user's description, will be sent to our embedding model for further recommendations. The model will then provide the user with the top 5 products based on recommendation scores.
+4. If products meeting the initial requirements are found, their details, along with the user's description, will be sent to our embedding model for further recommendations. 
 5. The dashboard will display the top 5 recommended products, including their names and clickable links that direct users to the corresponding product pages on Sephora.
 
 ## C. Findings
