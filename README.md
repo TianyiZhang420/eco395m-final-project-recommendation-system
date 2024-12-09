@@ -2,6 +2,8 @@
 ## Introduction
 ## A. Data Scraping
 ## B. Recommendation System Pipline
+***Filtering:***
+We develop a module that filters products based on user inputs such as category and price range by executing SQL queries on our `product_info` database, performing an inner join with the product_reviews database on product_id. This process generates an initial dataframe that includes detailed product information along with each product's corresponding reviews and the reviewers' skin type and skin tone. 
 ***User Interface:*** 
 We design an interactive dashboard in Python using Streamlit for users to select with their preference and get the best fit product from our recommendation system. Make sure you upload your data to Google Cloud Platform with the instance started and have your database credentials in the hidden .env file. Everything is being connected through the [dashboard.py](code/recommendation_system/dashboard.py) file by local modules and there is nothing else you need to run separately for queries or models. To open up the Streamlit dashboard, run the following command from the root:
 ```bash
