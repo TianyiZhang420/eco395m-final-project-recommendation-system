@@ -117,3 +117,8 @@ def scrape_all_products():
 
 # Execute the scraping process
 scrape_all_products()
+
+
+
+
+
