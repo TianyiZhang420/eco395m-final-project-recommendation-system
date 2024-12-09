@@ -20,4 +20,7 @@ Some dashboard highlights are as follows:
 
 ## C. Findings
 ## D. Limitations
+
+* Our recommendation system does not take the official product descriptions into account, which may contain information about the product's features and uses. If we incorporate the analysis of official descriptions into our recommendation system, the recommendations may better align with user needs.
+
 ## E. Further Plans
