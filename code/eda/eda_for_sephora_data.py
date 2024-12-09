@@ -32,7 +32,7 @@ def plot_category_distribution(df):
     plt.show()
 
     # Save the figure as an image
-    plt.savefig('category_distribution.png')
+    plt.savefig('image/category_distribution.png')
 
 def plot_rating_distribution(df):
     """Rating Distribution Barplot"""
@@ -51,7 +51,7 @@ def plot_rating_distribution(df):
     plt.show()
 
     # Save the figure as an image
-    plt.savefig('rating_distribution.png')
+    plt.savefig('image/rating_distribution.png')
 
 def plot_correlation_analysis(df):
     """Correlation Analysis Scatterplot"""
@@ -67,7 +67,7 @@ def plot_correlation_analysis(df):
     print(f"Correlation between ratings and number of reviews: {correlation:.2f}")
 
     # Save the figure as an image
-    plt.savefig('correlation_analysis.png')
+    plt.savefig('image/correlation_analysis.png')
 
 def plot_sentiment_analysis(review_df):
     """Sentiment Analysis Pie Chart"""
@@ -93,7 +93,7 @@ def plot_sentiment_analysis(review_df):
     plt.show()
 
     # Save the figure as an image
-    plt.savefig('sentiment_analysis.png')
+    plt.savefig('image/sentiment_analysis.png')
 
 # Example Usage
 plot_category_distribution(df)
