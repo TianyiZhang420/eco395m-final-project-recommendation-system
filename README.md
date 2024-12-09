@@ -3,7 +3,7 @@
 ## A. Data Scraping
 ## B. Recommendation System Pipline
 ***User Interface:*** 
-We design an interactive dashboard in Python using Streamlit for users to select with their preference and get the best fit product from our recommendation system. Make sure you upload your data to Google Cloud Platform with the instance started and have your database credentials in the hidden .env file, so that Streamlit can connect to the corresponding database. Everything is being connected through [dashboard.py](code/recommendation_system/dashboard.py.csv) file and there is nothing else you need to run separately for queries or models. To open up the Streamlit dashboard, run the following command from the root:
+We design an interactive dashboard in Python using Streamlit for users to select with their preference and get the best fit product from our recommendation system. Make sure you upload your data to Google Cloud Platform with the instance started and have your database credentials in the hidden .env file, so that Streamlit can connect to the corresponding database. Everything is being connected through the [dashboard.py](code/recommendation_system/dashboard.py) file and there is nothing else you need to run separately for queries or models. To open up the Streamlit dashboard, run the following command from the root:
 ```bash
 streamlit run code/recommendation_system/dashboard.py 
 ```
