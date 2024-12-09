@@ -7,6 +7,8 @@ We design an interactive dashboard in Python using Streamlit for users to select
 ```bash
 streamlit run code/recommendation_system/dashboard.py 
 ```
+The dahboard features are as follows:
+1. 
 
 ## C. Findings
 ## D. Limitations
