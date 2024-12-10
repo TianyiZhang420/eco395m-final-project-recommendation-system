@@ -5,6 +5,7 @@ import time
 from tqdm import tqdm
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 """
@@ -13,18 +14,21 @@ In order to To minimize the number of API calls, I've added some test code in th
 
 API_HOST = "sephora14.p.rapidapi.com"
 headers = {
-    'x-rapidapi-key': os.getenv("API_KEY"),
-    'x-rapidapi-host': "sephora14.p.rapidapi.com"
+    "x-rapidapi-key": os.getenv("API_KEY"),
+    "x-rapidapi-host": "sephora14.p.rapidapi.com",
 }
 
-df = pd.read_csv('../../data/category_product.csv')
-#df = pd.read_csv('../../data/category_product_test.csv') #use this line to test
-df = df.drop_duplicates(subset="productId", keep="first") #drop duplicated data and keep the first productId
-df.to_csv('../../data/category_product.csv', index=False, encoding='utf-8')
-#df.to_csv('../../data/category_product_test.csv', index=False, encoding='utf-8') #use this line to test
+df = pd.read_csv("../../data/category_product.csv")
+# df = pd.read_csv('../../data/category_product_test.csv') #use this line to test
+df = df.drop_duplicates(
+    subset="productId", keep="first"
+)  # drop duplicated data and keep the first productId
+df.to_csv("../../data/category_product.csv", index=False, encoding="utf-8")
+# df.to_csv('../../data/category_product_test.csv', index=False, encoding='utf-8') #use this line to test
 
-products = df['productId'].unique().tolist()
-#products = df['productId'].unique().tolist()[:1]  #use this line to test，only scrape the first category
+products = df["productId"].unique().tolist()
+# products = df['productId'].unique().tolist()[:1]  #use this line to test，only scrape the first category
+
 
 def fetch_details(product_id, page):
     """
@@ -46,6 +50,7 @@ def fetch_details(product_id, page):
     conn.close()
     return json.loads(data)
 
+
 def scrape_all_details():
     """
     Scrape detailed information for all products.
@@ -61,12 +66,12 @@ def scrape_all_details():
     list of dict: A list of dictionaries where each dictionary contains detailed information.
     """
     all_details = []
-    
+
     for product_id in tqdm(products, desc="Scraping products", unit="product"):
         page = 1
         try:
             response = fetch_details(product_id, page)
-            
+
             brand = response.get("brand", {})
             currentSku = response.get("currentSku", {})
             product_detail = {
@@ -77,7 +82,7 @@ def scrape_all_details():
                 "listPrice": currentSku.get("listPrice", ""),
                 "quickLookDescription": response.get("quickLookDescription", ""),
                 "lovesCount": response.get("lovesCount", 0),
-                "fullSiteProductUrl":response.get("fullSiteProductUrl", "")
+                "fullSiteProductUrl": response.get("fullSiteProductUrl", ""),
             }
             all_details.append(product_detail)
             page += 1
@@ -86,6 +91,7 @@ def scrape_all_details():
             print(f"Error fetching page {page} for product {product_id}: {e}")
             break
     return all_details
+
 
 def update_csv_with_details(all_details, input_file, output_file):
     """
@@ -104,22 +110,25 @@ def update_csv_with_details(all_details, input_file, output_file):
     """
     existing_data = pd.read_csv(input_file)
     new_data = pd.DataFrame(all_details)
-    
+
     if new_data.empty:
         print("No new data to update.")
         return
 
-    updated_data = pd.merge(existing_data, new_data, on='productId', how='left', suffixes=('', '_new'))
-    
-    updated_data = updated_data[updated_data['listPrice'].notna()]
-    updated_data = updated_data[updated_data['lovesCount'].notna()]
+    updated_data = pd.merge(
+        existing_data, new_data, on="productId", how="left", suffixes=("", "_new")
+    )
 
-    updated_data['listPrice'] = updated_data['listPrice'].replace({'\$': '', ',': ''}, regex=True)  
-    updated_data['listPrice'] = updated_data['listPrice'].astype(float)  
+    updated_data = updated_data[updated_data["listPrice"].notna()]
+    updated_data = updated_data[updated_data["lovesCount"].notna()]
+
+    updated_data["listPrice"] = updated_data["listPrice"].replace(
+        {"\$": "", ",": ""}, regex=True
+    )
+    updated_data["listPrice"] = updated_data["listPrice"].astype(float)
 
     updated_data.to_csv(output_file, index=False, encoding="utf-8", header=False)
     print(f"Successfully updated the data and saved to {output_file}")
-
 
 
 def main():
@@ -135,9 +144,9 @@ def main():
     Returns:
     None: This function executes the full pipeline and prints progress and completion messages.
     """
-    input_file = '../../data/category_product.csv'
+    input_file = "../../data/category_product.csv"
     # input_file = '../../data/category_product_test.csv' #use this to test
-    output_file = '../../data/category_product_cleaned.csv'
+    output_file = "../../data/category_product_cleaned.csv"
     # output_file = '../../data/category_product_cleaned_test.csv'  #use this to test
     print("Starting to scrape product details...")
     all_details = scrape_all_details()
@@ -145,11 +154,5 @@ def main():
     update_csv_with_details(all_details, input_file, output_file)
 
 
-
 if __name__ == "__main__":
     main()
-
-
-
-
-

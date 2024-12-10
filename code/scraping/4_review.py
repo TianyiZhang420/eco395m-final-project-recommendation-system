@@ -4,13 +4,14 @@ import csv
 import time
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # API request headers
 conn = http.client.HTTPSConnection("sephora14.p.rapidapi.com")
 headers = {
-    'x-rapidapi-key': os.getenv("API_KEY"),
-    'x-rapidapi-host': "sephora14.p.rapidapi.com"
+    "x-rapidapi-key": os.getenv("API_KEY"),
+    "x-rapidapi-host": "sephora14.p.rapidapi.com",
 }
 
 
@@ -31,12 +32,13 @@ def read_product_ids(csv_file):
             product_ids.append(row["productId"])
     return product_ids
 
+
 def extract_context_values(context_data):
     """
     Extract specific context field values from a product review.
 
-    The function extracts values for the fields 'skinTone', 'eyeColor', 'skinType', 
-    and 'hairColor' from a nested dictionary. If the fields are not present 
+    The function extracts values for the fields 'skinTone', 'eyeColor', 'skinType',
+    and 'hairColor' from a nested dictionary. If the fields are not present
     or are missing the 'Value' subfield, default to an empty string.
 
     Parameters:
@@ -51,23 +53,24 @@ def extract_context_values(context_data):
         "eyeColor": "",
         "skinType": "",
         "IncentivizedReview": "",
-        "hairColor": ""
+        "hairColor": "",
     }
-    
+
     if isinstance(context_data, dict):
         for key in result.keys():
             if key in context_data:
                 value_data = context_data[key]
                 if isinstance(value_data, dict) and "Value" in value_data:
-                    result[key] = value_data["Value"]  
-    
+                    result[key] = value_data["Value"]
+
     return result
+
 
 def fetch_reviews_for_product(product_id, limit=50):
     """
     Fetch reviews for a specific product from the API.
 
-    Retrieves up to 'limit' reviews for a given product, including fields such as 
+    Retrieves up to 'limit' reviews for a given product, including fields such as
     rating, review text, and context-specific values (e.g., skin tone, eye color).
 
     Parameters:
@@ -78,9 +81,9 @@ def fetch_reviews_for_product(product_id, limit=50):
     list of dict: A list of dictionaries where each dictionary represents a review, containing
                   fields like 'Rating', 'ReviewText', 'Title', and extracted context data values.
     """
-    offset = 0  
-    all_reviews = []  
-    
+    offset = 0
+    all_reviews = []
+
     url = f"/productReviews?productID={product_id}&page=1"
     conn.request("GET", url, headers=headers)
     res = conn.getresponse()
@@ -88,33 +91,36 @@ def fetch_reviews_for_product(product_id, limit=50):
 
     response_data = data.decode("utf-8")
     json_data = json.loads(response_data)
-    
+
     if isinstance(json_data, list):
-        results = json_data  
+        results = json_data
     else:
-        results = json_data.get("Results", [])  
-   
+        results = json_data.get("Results", [])
+
     if not results:
         print(f"All {product_id} 's reviews have been scraped!")
         return []
 
-    for review in results[:limit]: 
+    for review in results[:limit]:
         context_values = extract_context_values(review.get("ContextDataValues", {}))
-        all_reviews.append({
-            "ProductId": product_id, 
-            "OriginalProductName": review.get("OriginalProductName", ""),
-            "Rating": review.get("Rating", ""),
-            "Helpfulness": review.get("Helpfulness", ""),
-            "ReviewText": review.get("ReviewText", ""),
-            "Title": review.get("Title", ""),
-            "skinTone": context_values.get("skinTone", ""),
-            "eyeColor": context_values.get("eyeColor", ""),
-            "skinType": context_values.get("skinType", ""),
-            "hairColor": context_values.get("hairColor", "")
-        })
+        all_reviews.append(
+            {
+                "ProductId": product_id,
+                "OriginalProductName": review.get("OriginalProductName", ""),
+                "Rating": review.get("Rating", ""),
+                "Helpfulness": review.get("Helpfulness", ""),
+                "ReviewText": review.get("ReviewText", ""),
+                "Title": review.get("Title", ""),
+                "skinTone": context_values.get("skinTone", ""),
+                "eyeColor": context_values.get("eyeColor", ""),
+                "skinType": context_values.get("skinType", ""),
+                "hairColor": context_values.get("hairColor", ""),
+            }
+        )
 
     print(f"Get {len(all_reviews)} reviews")
     return all_reviews
+
 
 def save_reviews_to_csv(reviews, output_file="../../data/review.csv"):
     """
@@ -130,9 +136,19 @@ def save_reviews_to_csv(reviews, output_file="../../data/review.csv"):
     Returns:
     None: The function writes data directly to a file and prints a confirmation message.
     """
-    csv_headers = ["ProductId", "OriginalProductName", "Rating", "ReviewText", "Title", 
-                   "Helpfulness", "skinTone", "eyeColor", "skinType","hairColor"]
-    
+    csv_headers = [
+        "ProductId",
+        "OriginalProductName",
+        "Rating",
+        "ReviewText",
+        "Title",
+        "Helpfulness",
+        "skinTone",
+        "eyeColor",
+        "skinType",
+        "hairColor",
+    ]
+
     with open(output_file, mode="w", encoding="utf-8", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=csv_headers)
         if headers:
@@ -140,8 +156,9 @@ def save_reviews_to_csv(reviews, output_file="../../data/review.csv"):
 
         for review in reviews:
             writer.writerow(review)
-    
+
     print(f"Data has been saved to {output_file}, saved {len(reviews)} reviews.")
+
 
 def main():
     """
@@ -158,7 +175,7 @@ def main():
     Returns:
     None: The function executes the full pipeline and writes the resulting reviews to a CSV file.
     """
-    product_ids = read_product_ids("../../data/category_product.csv")  
+    product_ids = read_product_ids("../../data/category_product.csv")
     all_reviews = []
 
     for idx, product_id in enumerate(product_ids):
@@ -173,8 +190,8 @@ def main():
         time.sleep(1)
 
     if all_reviews:
-        save_reviews_to_csv(all_reviews) 
-    
+        save_reviews_to_csv(all_reviews)
+
 
 if __name__ == "__main__":
     main()
