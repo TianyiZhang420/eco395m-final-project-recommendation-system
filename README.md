@@ -60,7 +60,9 @@ Provides a sorted list of product recommendations with detailed information.The 
 
 ## C. Findings
 
-***Explorative Data Analysis***
+***Explorative Data Analysis(EDA)***
+
+This module provides visual and statistical insights into the dataset, focusing on product categories, ratings, reviews, and sentiment analysis. The EDA helps uncover patterns, relationships, and distributions in the data to better understand the dataset.
 
 
 
