@@ -2,12 +2,14 @@ import http.client
 import json
 import csv
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # API connection setup
 conn = http.client.HTTPSConnection("sephora14.p.rapidapi.com")
 
 headers = {
-    'x-rapidapi-key': "60bc1d8728msh735d4cfdb538423p1f40d0jsn42655b7e4794",
+    'x-rapidapi-key': os.getenv("API_KEY"),
     'x-rapidapi-host': "sephora14.p.rapidapi.com"
 }
 
@@ -21,7 +23,7 @@ decoded_data = data.decode("utf-8")
 parsed_data = json.loads(decoded_data)  # Assuming the API returns JSON
 print(parsed_data)
 # Specify the output file path
-output_file_path = "data/category.csv"
+output_file_path = "../../data/category.csv"
 
 # Ensure the output directory exists
 os.makedirs(os.path.dirname(output_file_path), exist_ok=True)
