@@ -106,7 +106,7 @@ Some dashboard highlights are as follows:
 
 ## D. Limitations
 
-* Our recommendation system does not take the official product descriptions into account, which may contain information about the product's features and uses. If we incorporate the analysis of official descriptions into our recommendation system, the recommendations may better align with user needs.
+* Our recommendation system does not take the official product descriptions into account, which may contain information about the product's features and uses. 
 * Our dashboard only displays selected product names and links to the websites, which might not be visually engaging from an UI/UX perspective.
 * Our recommendation system is linked to static database, such that new data has to be manually entered into google cloud platform in order to keep product information up to date. 
 
