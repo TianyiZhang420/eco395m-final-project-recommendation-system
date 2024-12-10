@@ -101,8 +101,8 @@ This module provides visual and statistical insights into the dataset, focusing 
 </div>
 
 - **Overwhelmingly Positive Sentiment**: Most reviews (88.2%) are positive, reflecting strong approval and satisfaction from users.
-- **Moderate Neutral Sentiment**: A smaller percentage of reviews (9.8%) are neutral, suggesting an indifferent or average user experience.
-- **Low Negative Sentiment**: Only 2% of reviews are negative, indicating minimal dissatisfaction among users.
+- **Moderate Negative Sentiment**: A smaller percentage of reviews (9.8%) are negative, indicating there are only few dissatisfaction among users.
+- **Low Neutral Sentiment**: Only 2% of reviews are neutral, suggesting an indifferent or average user experience.
 
 ## D. Limitations
 
