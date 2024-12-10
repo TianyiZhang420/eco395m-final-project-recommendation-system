@@ -113,4 +113,4 @@ Some dashboard highlights are as follows:
 ## E. Further Plans
 * Include the official product descriptions in the analyzed data, generate embeddings, and calculate their similarity to the user's input as part of the recommendation score.
 * Redesign output interface by adding elements includng but not limited to images, ratings, or other visual cues.
-* Integrate real-time data automatically from external sources like Sephora’s API to provide updated product details on a regular basis. 
+* Integrate real-time data automatically from Sephora’s API using timed management tools to provide updated product details on a regular basis. 
