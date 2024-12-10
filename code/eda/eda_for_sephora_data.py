@@ -5,7 +5,7 @@ import seaborn as sns
 from textblob import TextBlob
 
 # Load the data
-df = pd.read_csv("data/category_product_cleaned.csv")
+df = pd.read_csv("data/category_product_cleaned_with_header.csv")
 review_df = pd.read_csv("data/review.csv")
 
 
@@ -30,7 +30,6 @@ def plot_category_distribution(df):
     plt.axis("off")  # Remove axis
     plt.title("Number of Products in Main Categories", fontsize=16)
     plt.tight_layout()
-    plt.show()
 
     # Save the figure as an image
     plt.savefig("image/category_distribution.png")
@@ -50,8 +49,6 @@ def plot_rating_distribution(df):
     plt.title("Number of Products in Rating Ranges")
     plt.xlabel("Rating Range")
     plt.ylabel("Count of Products")
-    plt.show()
-
     # Save the figure as an image
     plt.savefig("image/rating_distribution.png")
 
@@ -63,7 +60,6 @@ def plot_correlation_analysis(df):
     plt.title("Correlation between Ratings and Number of Reviews")
     plt.xlabel("Rating")
     plt.ylabel("Number of Reviews")
-    plt.show()
 
     # Calculate the correlation coefficient
     correlation = df["rating"].corr(df["reviews"])
@@ -101,7 +97,6 @@ def plot_sentiment_analysis(review_df):
     )
     plt.title("Sentiment Analysis of Reviews")
     plt.axis("equal")  # Make the pie chart circular
-    plt.show()
 
     # Save the figure as an image
     plt.savefig("image/sentiment_analysis.png")
