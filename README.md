@@ -1,7 +1,55 @@
 # eco395m-final-project-recommendation-system
 ## Introduction
 ## A. Data Scraping
-## B. Recommendation System
+## B. Data Overview
+
+### Explorative Data Analysis(EDA)
+
+This module provides visual and statistical insights into the dataset, focusing on product categories, ratings, reviews, and sentiment analysis. The EDA helps uncover patterns, relationships, and distributions in the data to better understand the dataset.
+
+***Category Distribution***
+
+<div align="center">
+<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/category_distribution.png" alt="Image Description" style="width:50%;height:auto;">
+</div>
+
+ - **Dominance of Facial Makeup and Skincare**: Foundation makeup and mascara categories dominate in terms of product availability, indicating higher market focus.
+ - **Limited Representation of Certain Categories**: Blush and sunscreen have significantly fewer products, which may indicate gaps in these markets.
+ - **Even Distribution in Some Areas**: Certain categories, like luminizers and face masks, show a balanced presence.
+
+
+***Correlation Analysis of ratings and the number of reviews***
+
+<div align="center">
+<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/correlation_analysis.png" alt="Image Description" style="width:50%;height:auto;">
+</div>
+
+- **Correlation Coefficient**: The coefficient is -0.02, indicating a near-zero and slightly negative relationship. This suggests that ratings and the number of reviews are almost independent of each other.
+- **Outliers**: Some products with mid-range ratings (e.g., ~4.0) have an exceptionally high number of reviews (>20,000), which may influence the overall distribution.
+
+
+***Rating Distribution***
+
+
+<div align="center">
+<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/rating_distribution.png" alt="Image Description" style="width:50%;height:auto;">
+</div>
+
+- **Dominance of Highly Rated Products**: The majority of products are rated between 4–5, with over 600 products falling into this category, highlighting a trend of high customer satisfaction.
+- **Moderately Rated Products**: A smaller but notable portion of products has ratings in the 3–4 range, indicating decent but less impressive customer satisfaction.
+- **Scarcity of Low Ratings**: Very few products fall in the 2–3 and 1–2 ranges, showing a rare occurrence of dissatisfaction.oducts with ratings in the ranges 2–3 and 1–2 are extremely few, indicating that most products are rated relatively highly.
+
+***Sentiment Analysis***
+
+<div align="center">
+<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/sentiment_analysis.png" alt="Image Description" style="width:50%;height:auto;">
+</div>
+
+- **Overwhelmingly Positive Sentiment**: Most reviews (88.2%) are positive, reflecting strong approval and satisfaction from users.
+- **Moderate Negative Sentiment**: A smaller percentage of reviews (9.8%) are negative, indicating there are only few dissatisfaction among users.
+- **Low Neutral Sentiment**: Only 2% of reviews are neutral, suggesting an indifferent or average user experience.
+
+## C. Recommendation System
 ### Filtering:
 We develop a module that filters products based on user inputs for category and price range by executing SQL queries on our `product_info` database, performing an inner join with the `product_reviews` database on `productid`. This process generates an initial dataframe that includes product information along with each product's corresponding reviews and the reviewers' information. Because users may also specify wanted ingredients and unwanteded ingredients, we filter products that include the wanted ingredients and exclude the unwanted ingredients. To make the subsequent embedding comparison process more efficient, we select the reviews based on the user's input for skin type and skin tone. If a product has reviewers whose skin type and skin tone match the user's inputs, only those matching reviews are retained in the dataframe. If no such matches are found, all reviews for that product are kept as data for further analysis. Through the above steps, we obtain a cleaned dataframe that serves as the data for the next stage of analysis.
 
@@ -55,54 +103,6 @@ Some dashboard highlights are as follows:
 4. If products meeting the initial requirements are found, their details, along with the user's description, will be sent to our embedding model for further recommendations. 
 5. The dashboard will display the top 5 recommended products, including their names and clickable links that direct users to the corresponding product pages on Sephora.
 
-
-## C. Findings
-
-### Explorative Data Analysis(EDA)
-
-This module provides visual and statistical insights into the dataset, focusing on product categories, ratings, reviews, and sentiment analysis. The EDA helps uncover patterns, relationships, and distributions in the data to better understand the dataset.
-
-***Category Distribution***
-
-<div align="center">
-<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/category_distribution.png" alt="Image Description" style="width:50%;height:auto;">
-</div>
-
- - **Dominance of Facial Makeup and Skincare**: Foundation makeup and mascara categories dominate in terms of product availability, indicating higher market focus.
- - **Limited Representation of Certain Categories**: Blush and sunscreen have significantly fewer products, which may indicate gaps in these markets.
- - **Even Distribution in Some Areas**: Certain categories, like luminizers and face masks, show a balanced presence.
-
-
-***Correlation Analysis of ratings and the number of reviews***
-
-<div align="center">
-<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/correlation_analysis.png" alt="Image Description" style="width:50%;height:auto;">
-</div>
-
-- **Correlation Coefficient**: The coefficient is -0.02, indicating a near-zero and slightly negative relationship. This suggests that ratings and the number of reviews are almost independent of each other.
-- **Outliers**: Some products with mid-range ratings (e.g., ~4.0) have an exceptionally high number of reviews (>20,000), which may influence the overall distribution.
-
-
-***Rating Distribution***
-
-
-<div align="center">
-<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/rating_distribution.png" alt="Image Description" style="width:50%;height:auto;">
-</div>
-
-- **Dominance of Highly Rated Products**: The majority of products are rated between 4–5, with over 600 products falling into this category, highlighting a trend of high customer satisfaction.
-- **Moderately Rated Products**: A smaller but notable portion of products has ratings in the 3–4 range, indicating decent but less impressive customer satisfaction.
-- **Scarcity of Low Ratings**: Very few products fall in the 2–3 and 1–2 ranges, showing a rare occurrence of dissatisfaction.oducts with ratings in the ranges 2–3 and 1–2 are extremely few, indicating that most products are rated relatively highly.
-
-***Sentiment Analysis***
-
-<div align="center">
-<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/sentiment_analysis.png" alt="Image Description" style="width:50%;height:auto;">
-</div>
-
-- **Overwhelmingly Positive Sentiment**: Most reviews (88.2%) are positive, reflecting strong approval and satisfaction from users.
-- **Moderate Negative Sentiment**: A smaller percentage of reviews (9.8%) are negative, indicating there are only few dissatisfaction among users.
-- **Low Neutral Sentiment**: Only 2% of reviews are neutral, suggesting an indifferent or average user experience.
 
 ## D. Limitations
 
