@@ -18,7 +18,52 @@ Some dashboard highlights are as follows:
 4. If products meeting the initial requirements are found, their details, along with the user's description, will be sent to our embedding model for further recommendations. 
 5. The dashboard will display the top 5 recommended products, including their names and clickable links that direct users to the corresponding product pages on Sephora.
 
+### Modeling:
+
+Here, we utilizes natural language processing (NLP) techniques and machine learning models to compute semantic similarities between user descriptions and product reviews, while also considering product ratings to enhance recommendations.
+
+***1. Semantic Matching:***
+#### Usage:
+  - Input Requirements:
+    1. User Description (`user_des`): A string describing the product the user is looking for.
+    2. Product Information (`product_info`): A pandas DataFrame with product information.
+  - Output:
+    1. Ranked Product Dataframe (`ranked_df`): A DataFrame with the ranked product recommendations.
+
+**Model Used:** The system uses the `all-MiniLM-L6-v2` model from the `SentenceTransformer` library, a lightweight pre-trained model optimized for semantic tasks.
+
+**Process:** The user's input is converted into a semantic vector. Each product review is similarly transformed into a semantic vector. The similarity between the user input vector and each product review vector is calculated using cosine similarity. Higher similarity scores indicate a closer match between the user's needs and the product reviews.
+
+***2. Weighted Scoring:***
+  
+  The recommendation system combines semantic similarity and product ratings to calculate a final score for each product. This score is used to rank products and generate a prioritized list of recommendations.
+
+**Scoring Logic:** The recommendation score is calculated using the formula:
+
+$$ \text{Score} = w_1 \cdot (\text{Similarity Score})^\beta + w_2 \cdot (\text{Rating})^\alpha$$
+
+  where:
+
+  - Rating: Normalized product rating (scaled to a 0–1 range).
+  - Weights ($w_1, w_2$): Control the importance of similarity and rating in the final score.
+  - Exponents ($\alpha, \beta$): Penalize lower similarity scores or ratings more heavily, emphasizing higher values.
+
+**Default Parameters:**
+  - $w_1 = 0.7, w_2 = 0.3$: Prioritizes semantic similarity over product ratings.
+  - $\alpha = 0.8, \beta = 0.8$: Adjust the influence of ratings and similarity scores.
+
+***3. Ranked Output:***
+
+Provides a sorted list of product recommendations with detailed information.The system computes a final score for each product based on semantic similarity and rating. Products are sorted in descending order by their scores. A ranked DataFrame is created, starting with the highest-ranked product.
+
+
+
 ## C. Findings
+
+***Explorative Data Analysis***
+
+
+
 ## D. Limitations
 
 * Our recommendation system does not take the official product descriptions into account, which may contain information about the product's features and uses. If we incorporate the analysis of official descriptions into our recommendation system, the recommendations may better align with user needs.
