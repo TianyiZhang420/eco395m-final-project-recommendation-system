@@ -64,7 +64,45 @@ This module provides visual and statistical insights into the dataset, focusing 
 
 ***Category Distribution***
 
+<div align="center">
+<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/category_distribution.png" alt="Image Description" style="width:50%;height:auto;">
+</div>
 
+ - **Dominance of Facial Makeup and Skincare**: Foundation makeup and mascara categories dominate in terms of product availability, indicating higher market focus.
+ - **Limited Representation of Certain Categories**: Blush and sunscreen have significantly fewer products, which may indicate gaps in these markets.
+ - **Even Distribution in Some Areas**: Certain categories, like luminizers and face masks, show a balanced presence.
+
+
+***Correlation Analysis of ratings and the number of reviews***
+
+<div align="center">
+<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/correlation_analysis.png" alt="Image Description" style="width:50%;height:auto;">
+</div>
+
+- **Correlation Coefficient**: The coefficient is -0.02, indicating a near-zero and slightly negative relationship. This suggests that ratings and the number of reviews are almost independent of each other.
+- **Outliers**: Some products with mid-range ratings (e.g., ~4.0) have an exceptionally high number of reviews (>20,000), which may influence the overall distribution.
+
+
+***Rating Distribution***
+
+
+<div align="center">
+<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/rating_distribution.png" alt="Image Description" style="width:50%;height:auto;">
+</div>
+
+- **Dominance of Highly Rated Products**: The majority of products are rated between 4–5, with over 600 products falling into this category, highlighting a trend of high customer satisfaction.
+- **Moderately Rated Products**: A smaller but notable portion of products has ratings in the 3–4 range, indicating decent but less impressive customer satisfaction.
+- **Scarcity of Low Ratings**: Very few products fall in the 2–3 and 1–2 ranges, showing a rare occurrence of dissatisfaction.oducts with ratings in the ranges 2–3 and 1–2 are extremely few, indicating that most products are rated relatively highly.
+
+***Sentiment Analysis***
+
+<div align="center">
+<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/sentiment_analysis.png" alt="Image Description" style="width:50%;height:auto;">
+</div>
+
+- **Overwhelmingly Positive Sentiment**: Most reviews (88.2%) are positive, reflecting strong approval and satisfaction from users.
+- **Moderate Neutral Sentiment**: A smaller percentage of reviews (9.8%) are neutral, suggesting an indifferent or average user experience.
+- **Low Negative Sentiment**: Only 2% of reviews are negative, indicating minimal dissatisfaction among users.
 
 ## D. Limitations
 
