@@ -2,18 +2,19 @@ import http.client
 import json
 import pandas as pd
 import csv
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # API request headers
-API_KEY = "60bc1d8728msh735d4cfdb538423p1f40d0jsn42655b7e4794"
 API_HOST = "sephora14.p.rapidapi.com"
-
 headers = {
-    'x-rapidapi-key': API_KEY,
-    'x-rapidapi-host': API_HOST
+    'x-rapidapi-key': os.getenv("API_KEY"),
+    'x-rapidapi-host': "sephora14.p.rapidapi.com"
 }
 
 # Read category list from CSV
-df = pd.read_csv('data/pick_category.csv') 
+df = pd.read_csv('../../data/pick_category.csv') 
 categories = df['categoryID'].unique().tolist()
 
 def fetch_products(category_id, page):
@@ -70,46 +71,44 @@ def scrape_all_products():
     None: This function writes the scraped product data to a CSV file and prints a summary of the operation.
     """
     all_products = []
-    output_file = "data/category_product.csv"
+    output_file = "../../data/category_product.csv"
     
     for category in categories:
         page = 1
         product_fetched = 0  # Initialize the product counter for each category
         
-        while product_fetched < 75:  # Limit to 75 products per category
-            try:
-                response = fetch_products(category, page)
-                products = response.get("products", [])
-                
-                if len(products) == 0:  
-                    break
-
-                # Extract product information
-                for product in products:
-                    if product_fetched >= 75:  
-                        break
-                    
-                    # Handle missing fields like rating or reviews (default to 0 if missing)
-                    product_info = {
-                        "categoryID": category,
-                        "brandName": product.get("brandName", "Unknown"),
-                        "displayName": product.get("displayName", "Unknown"),
-                        "heroImage": product.get("heroImage", "Unknown"),
-                        "productId": product.get("productId", "Unknown"),
-                        "rating": product.get("rating", 0),  # Default to 0 if missing
-                        "reviews": product.get("reviews", 0),  # Default to 0 if missing
-                    }
-                    all_products.append(product_info)
-                    product_fetched += 1  
-
-                page += 1  # Move to the next page
-
-                if product_fetched >= 75:
-                    break
-
-            except Exception as e:
-                print(f"Error fetching page {page} for category {category}: {e}")
+        # while product_fetched < 75:  # Limit to 75 products per category
+        try:
+            response = fetch_products(category, page)
+            products = response.get("products", [])
+            
+            if len(products) == 0:  
                 break
+
+            # Extract product information
+            for product in products:
+                if product_fetched >= 75:  
+                    break
+                
+                # Handle missing fields like rating or reviews (default to 0 if missing)
+                product_info = {
+                    "categoryID": category,
+                    "brandName": product.get("brandName", "Unknown"),
+                    "displayName": product.get("displayName", "Unknown"),
+                    "heroImage": product.get("heroImage", "Unknown"),
+                    "productId": product.get("productId", "Unknown"),
+                    "rating": product.get("rating", 0),  # Default to 0 if missing
+                    "reviews": product.get("reviews", 0),  # Default to 0 if missing
+                }
+                all_products.append(product_info)
+                product_fetched += 1  
+
+            page += 1  # Move to the next page
+
+
+        except Exception as e:
+            print(f"Error fetching page {page} for category {category}: {e}")
+            break
 
     # Save the fetched data to CSV
     save_to_csv(all_products, output_file)

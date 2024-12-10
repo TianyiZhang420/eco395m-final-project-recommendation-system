@@ -3,20 +3,28 @@ import json
 import pandas as pd
 import time
 from tqdm import tqdm
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-API_KEY = "60bc1d8728msh735d4cfdb538423p1f40d0jsn42655b7e4794"
+"""
+In order to To minimize the number of API calls, I've added some test code in the comments that you can use to try to run and prevent running a lot of data at once and causing the API to exceed its limits.
+"""
+
 API_HOST = "sephora14.p.rapidapi.com"
-
 headers = {
-    'x-rapidapi-key': API_KEY,
-    'x-rapidapi-host': API_HOST
+    'x-rapidapi-key': os.getenv("API_KEY"),
+    'x-rapidapi-host': "sephora14.p.rapidapi.com"
 }
 
-df = pd.read_csv('data/category_product.csv')
+df = pd.read_csv('../../data/category_product.csv')
+#df = pd.read_csv('../../data/category_product_test.csv') #use this line to test
 df = df.drop_duplicates(subset="productId", keep="first") #drop duplicated data and keep the first productId
-df.to_csv('data/category_product.csv', index=False, encoding='utf-8')
+df.to_csv('../../data/category_product.csv', index=False, encoding='utf-8')
+#df.to_csv('../../data/category_product_test.csv', index=False, encoding='utf-8') #use this line to test
 
 products = df['productId'].unique().tolist()
+#products = df['productId'].unique().tolist()[:1]  #use this line to test，only scrape the first category
 
 def fetch_details(product_id, page):
     """
@@ -109,8 +117,9 @@ def update_csv_with_details(all_details, input_file, output_file):
     updated_data['listPrice'] = updated_data['listPrice'].replace({'\$': '', ',': ''}, regex=True)  
     updated_data['listPrice'] = updated_data['listPrice'].astype(float)  
 
-    updated_data.to_csv(output_file, index=False, encoding="utf-8")
+    updated_data.to_csv(output_file, index=False, encoding="utf-8", header=False)
     print(f"Successfully updated the data and saved to {output_file}")
+
 
 
 def main():
@@ -126,8 +135,10 @@ def main():
     Returns:
     None: This function executes the full pipeline and prints progress and completion messages.
     """
-    input_file = 'data/category_product.csv'
-    output_file = 'data/category_product_cleaned.csv'
+    input_file = '../../data/category_product.csv'
+    # input_file = '../../data/category_product_test.csv' #use this to test
+    output_file = '../../data/category_product_cleaned.csv'
+    # output_file = '../../data/category_product_cleaned_test.csv'  #use this to test
     print("Starting to scrape product details...")
     all_details = scrape_all_details()
     print(f"Scraped details for {len(all_details)} entries. Updating CSV...")
