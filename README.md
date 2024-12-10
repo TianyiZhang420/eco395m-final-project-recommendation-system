@@ -18,8 +18,7 @@ Some dashboard highlights are as follows:
 4. If products meeting the initial requirements are found, their details, along with the user's description, will be sent to our embedding model for further recommendations. 
 5. The dashboard will display the top 5 recommended products, including their names and clickable links that direct users to the corresponding product pages on Sephora.
 
-### Modeling:
-
+***Modeling:*** 
 Here, we utilizes natural language processing (NLP) techniques and machine learning models to compute semantic similarities between user descriptions and product reviews, while also considering product ratings to enhance recommendations.
 
 ***1. Semantic Matching:***
