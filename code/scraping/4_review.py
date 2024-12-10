@@ -176,6 +176,5 @@ def main():
         save_reviews_to_csv(all_reviews) 
     
 
-# 执行主函数
 if __name__ == "__main__":
     main()
