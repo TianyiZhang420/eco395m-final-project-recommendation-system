@@ -15,17 +15,13 @@ The system enables users to specify their desired product attributes, such as pr
 We leverage the Sephora API via Rapid API (https://rapidapi.com/Octapi/api/sephora14) to scrape data on skincare and makeup products. The scraping process is broken into four sequential scripts, each targeting specific data points. All scraped data (`product_info`, `product_reviews`) is stored in a PostgreSQL database hosted on Google Cloud Platform (GCP), which ensures efficient storage and scalability. We use DBeaver as the database client to manage and query the data during the development and analysis phases.
 
 ### 1. **Get Category ID**
-```bash
-python3 run code/scraping/1_get_category.py
-```
+
 - Fetches all category IDs and labels from Sephora.
 - Focuses on categories within the **skincare** and **makeup** sections.
 - Selects categories that contain more products for deeper analysis.
 
 ### 2. **Retrieve Product Information**
-```bash
-python3 run code/scraping/2_get_productinfo.py
-```
+
 - Searches for products using the selected category IDs.
 - Collects product IDs and basic product information, such as:
   - brandName
@@ -36,9 +32,8 @@ python3 run code/scraping/2_get_productinfo.py
   - reviews (The number of reviews)
 
 ### 3. **Fetch Product Details**
-```bash
-python3 run code/scraping/3_product_detail.py
-```
+3 run code/scraping/3_product_detail.py
+
 - Uses the **product IDs** obtained in the previous step to gather detailed information about each product, such as:
   - longDescription
   - brandID
@@ -49,9 +44,7 @@ python3 run code/scraping/3_product_detail.py
   - fullSiteProductUrl
 
 ### 4. **Scrape Product Reviews**
-```bash
-python3 run code/scraping/4_review.py
-```
+
 - Retrieves customer reviews for each product by searching with the product IDs.
 - Extracts data points including:
   - OriginalProductName
@@ -64,9 +57,9 @@ python3 run code/scraping/4_review.py
   - skinType
   - hairColor
 
-**Execution method:** To execute the scraping code and get the cleaned `csv` file, you should first run the following codes from the terminal in order:
+**Execution method:** To execute the scraping code and get the data, you should first run the following codes from the terminal in order:
 ```bash
-git clone
+git clone git@github.com:TianyiZhang420/eco395m-final-project-recommendation-system.git
 cd eco395m-final-project-recommendation-system
 pip install -r requirements.txt
 ```
