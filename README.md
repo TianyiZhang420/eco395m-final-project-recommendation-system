@@ -114,7 +114,13 @@ This module provides visual and statistical insights into the dataset, focusing 
 
 ## C. Recommendation System
 ### Filtering:
-We develop a module that filters products based on user inputs for category and price range by executing SQL queries on our `product_info` database, performing an inner join with the `product_reviews` database on `productid`. This process generates an initial dataframe that includes product information along with each product's corresponding reviews and the reviewers' information. Because users may also specify wanted ingredients and unwanteded ingredients, we filter products that include the wanted ingredients and exclude the unwanted ingredients. To make the following score computation process more efficient, we select the reviews based on the user's input for skin type and skin tone. If a product has reviewers whose skin type and skin tone match the user's inputs, only those matching reviews are retained in the dataframe. If no such matches are found, all reviews for that product are kept as data for further analysis. Through the above steps, we obtain a cleaned dataframe that serves as the input data for the next stage of analysis.
+We develop a module that filters products based on user inputs for category and price range by executing SQL queries on our `product_info` database on Google Cloud Platform (GCP), performing an inner join with the `product_reviews` database on `productid`. This process generates an initial dataframe that includes product information along with each product's corresponding reviews and the reviewers' information. 
+
+Because users may also specify wanted ingredients and unwanteded ingredients, we filter products that include the wanted ingredients and exclude the unwanted ingredients. 
+
+To make the following score computation process more efficient, we select the reviews based on the user's input for skin type and skin tone. If a product has reviewers whose skin type and skin tone match the user's inputs, only those matching reviews are retained in the dataframe. If no such matches are found, all reviews for that product are kept as data for further analysis. 
+
+Through the above steps, we obtain a cleaned dataframe that serves as the input data for the next stage of analysis.
 
 ### Modeling:
 Here, we utilizes natural language processing (NLP) techniques and machine learning models to compute semantic similarities between user descriptions and product reviews, while also considering product ratings to enhance recommendations.
@@ -166,6 +172,9 @@ Some dashboard highlights are as follows:
 4. If products meeting the initial requirements are found, their details, along with the user's description, will be sent to our embedding model for further recommendations. 
 5. The dashboard will display the top 5 recommended products, including their names and clickable links that direct users to the corresponding product pages on Sephora.
 
+The pictures below demonstrate an example of selecting sunscreens using our dashboard, along with the display of the recommended results:
+![](image/dashboard_example_selection.png)
+![](image/dashboard_example_output.png)
 
 ## D. Limitations
 
