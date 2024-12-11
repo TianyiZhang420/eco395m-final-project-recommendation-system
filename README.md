@@ -56,7 +56,8 @@ We leverage the Sephora API via Rapid API (https://rapidapi.com/Octapi/api/sepho
   - skinType
   - hairColor
 
-**Execution method:** To execute the scraping code and get the data, you should first run the following codes from the terminal in order:
+***Execution method*** 
+To execute the scraping code and get the data, you should first run the following codes from the terminal in order:
 ```bash
 git clone git@github.com:TianyiZhang420/eco395m-final-project-recommendation-system.git
 cd eco395m-final-project-recommendation-system
