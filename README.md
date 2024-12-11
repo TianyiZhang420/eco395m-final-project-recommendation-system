@@ -72,6 +72,10 @@ python3 run code/scraping/3_product_detail.py
 python3 run code/scraping/4_review.py
 ```
 
+A brief workflow of our pipeline is provided below:
+<img width="1344" alt="image" src="https://github.com/user-attachments/assets/62cea8bf-e996-44e9-b6b2-fd0968c8a025" />
+
+
 ## B. Data Overview
 
 ### Explorative Data Analysis(EDA)
