@@ -174,7 +174,6 @@ Some dashboard highlights are as follows:
 
 The pictures below demonstrate an example of selecting sunscreens using our dashboard, along with the display of the recommended results:
 ![](image/dashboard_example_selection.png)
-![](image/dashboard_example_output.png)
 
 ## D. Limitations
 
@@ -182,9 +181,8 @@ The pictures below demonstrate an example of selecting sunscreens using our dash
 * We currently focus on a subset of categories within skincare and makeup, prioritizing those with a higher number of products. However, this approach excludes less populated categories that might still be of interest to users.
 * Our recommendation system does not take the official product descriptions into account, which may contain information about the product's features and uses. 
 * Our dashboard only displays selected product names and links to the websites, which might not be visually engaging from an UI/UX perspective.
-* Our recommendation system is linked to static database, such that new data has to be manually entered into google cloud platform in order to keep product information up to date. 
 
 ## E. Further Plans
+* Integrate real-time data automatically from Sephora’s API using script management tools to provide updated product details on a regular basis. 
 * Include the official product descriptions in the analyzed data, generate embeddings, and calculate their similarity to the user's input as part of the recommendation score.
 * Redesign output interface by adding elements includng but not limited to images, ratings, or other visual cues.
-* Integrate real-time data automatically from Sephora’s API using timed management tools to provide updated product details on a regular basis. 
