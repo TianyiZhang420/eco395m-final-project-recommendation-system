@@ -167,8 +167,8 @@ Some dashboard highlights are as follows:
 5. The dashboard will display the top 5 recommended products, including their names and clickable links that direct users to the corresponding product pages on Sephora.
 
 The pictures below demonstrate an example of selecting sunscreens using our dashboard, along with the display of the recommended results:
-![](images/dashboard_example_selection.png)
-![](images/dashboard_example_output.png)
+![](image/dashboard_example_selection.png)
+![](image/dashboard_example_output.png)
 
 ## D. Limitations
 
