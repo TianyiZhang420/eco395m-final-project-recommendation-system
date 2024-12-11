@@ -114,7 +114,7 @@ This module provides visual and statistical insights into the dataset, focusing 
 
 ## C. Recommendation System
 ### Filtering:
-We develop a module that filters products based on user inputs for category and price range by executing SQL queries on our `product_info` database, performing an inner join with the `product_reviews` database on `productid`. This process generates an initial dataframe that includes product information along with each product's corresponding reviews and the reviewers' information. 
+We develop a module that filters products based on user inputs for category and price range by executing SQL queries on our `product_info` database on Google Cloud Platform (GCP), performing an inner join with the `product_reviews` database on `productid`. This process generates an initial dataframe that includes product information along with each product's corresponding reviews and the reviewers' information. 
 
 Because users may also specify wanted ingredients and unwanteded ingredients, we filter products that include the wanted ingredients and exclude the unwanted ingredients. 
 
