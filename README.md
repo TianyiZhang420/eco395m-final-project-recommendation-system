@@ -1,6 +1,69 @@
 # eco395m-final-project-recommendation-system
 ## Introduction
+In today’s rapidly growing e-commerce landscape, selecting the ideal product from a vast array of options can be overwhelming for consumers. This project focuses on building a recommendation system tailored to Sephora's skincare and makeup products, leveraging data scraped from Sephora's API via Rapid API. By combining advanced data scraping techniques, sentiment analysis, and natural language processing (NLP), we aim to provide personalized recommendations that cater to individual user preferences and needs.
+
+The system enables users to specify their desired product attributes, such as price range, category, skin type, and preferred ingredients. Using semantic similarity and weighted scoring mechanisms, our recommendation system ranks products that best match user inputs. The interactive dashboard further simplifies the selection process, offering a wonderful experience for users to find products suited to their requirements.
+
+***Project Goals***
+- **1. Efficient Data Collection and Processing:** Develop a robust pipeline for scraping and processing product data, including categories, product details, and customer reviews, to build a comprehensive dataset.
+- **2. Personalized Product Recommendations:** Implement an intelligent recommendation system using machine learning and NLP to analyze user inputs and product reviews for semantic similarity and relevance.
+- **3. User-Friendly Interface**: Design an interactive Streamlit dashboard that allows users to specify preferences and access ranked product recommendations with ease.
+- **4. Enhance Decision-Making**: Provide users with meaningful insights through sentiment analysis, product attributes, and customer reviews to support informed decision-making.
+
 ## A. Data Scraping
+***Source***
+We leverage the Sephora API via Rapid API to scrape data on skincare and makeup products. The scraping process is broken into four sequential scripts, each targeting specific data points. All scraped data is stored in a PostgreSQL database hosted on Google Cloud Platform (GCP), which ensures efficient storage and scalability. We use DBeaver as the database client to manage and query the data during the development and analysis phases.
+
+### 1. **Get Category ID**
+```bash
+python3 run code/scraping/1_get_category.py
+```
+- Fetches all category IDs and labels from Sephora.
+- Focuses on categories within the **skincare** and **makeup** sections.
+- Selects categories that contain more products for deeper analysis.
+
+### 2. **Retrieve Product Information**
+```bash
+python3 run code/scraping/2_get_productinfo.py
+```
+- Searches for products using the selected category IDs.
+- Collects product IDs and basic product information, such as:
+  - brandName
+  - displayName
+  - heroImage,
+  - **productId**
+  - rating (The average of rating, from 1 to 5)
+  - reviews (The number of reviews)
+
+### 3. **Fetch Product Details**
+```bash
+python3 run code/scraping/3_product_detail.py
+```
+- Uses the **product IDs** obtained in the previous step to gather detailed information about each product, such as:
+  - longDescription
+  - brandID
+  - ingredientDesc
+  - listPrice
+  - quickLookDescription
+  - lovesCount
+  - fullSiteProductUrl
+
+### 4. **Scrape Product Reviews**
+```bash
+python3 run code/scraping/4_review.py
+```
+- Retrieves customer reviews for each product by searching with the product IDs.
+- Extracts data points including:
+  - OriginalProductName
+  - Rating
+  - ReviewText
+  - Title
+  - Helpfulness
+  - skinTone
+  - eyeColor
+  - skinType
+  - hairColor
+
 ## B. Data Overview
 
 ### Explorative Data Analysis(EDA)
@@ -106,6 +169,8 @@ Some dashboard highlights are as follows:
 
 ## D. Limitations
 
+* Our system relies on static data stored in the PostgreSQL database hosted on Google Cloud Platform (GCP). Any updates to product information, reviews, or categories require manual re-scraping and database updates.
+* We currently focus on a subset of categories within skincare and makeup, prioritizing those with a higher number of products. However, this approach excludes less populated categories that might still be of interest to users.
 * Our recommendation system does not take the official product descriptions into account, which may contain information about the product's features and uses. 
 * Our dashboard only displays selected product names and links to the websites, which might not be visually engaging from an UI/UX perspective.
 * Our recommendation system is linked to static database, such that new data has to be manually entered into google cloud platform in order to keep product information up to date. 

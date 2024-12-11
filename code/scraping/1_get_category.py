@@ -3,14 +3,15 @@ import json
 import csv
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # API connection setup
 conn = http.client.HTTPSConnection("sephora14.p.rapidapi.com")
 
 headers = {
-    'x-rapidapi-key': os.getenv("API_KEY"),
-    'x-rapidapi-host': "sephora14.p.rapidapi.com"
+    "x-rapidapi-key": os.getenv("API_KEY"),
+    "x-rapidapi-host": "sephora14.p.rapidapi.com",
 }
 
 # Make the API request
@@ -33,11 +34,13 @@ try:
     with open(output_file_path, mode="w", newline="", encoding="utf-8") as csv_file:
         csv_writer = csv.writer(csv_file)
         # Write header row
-        csv_writer.writerow(["categoryLabel", "categoryID"])  
+        csv_writer.writerow(["categoryLabel", "categoryID"])
 
         # Write category data
         for category in parsed_data:
-            csv_writer.writerow([category.get("categoryLabel"), category.get("categoryID")])
+            csv_writer.writerow(
+                [category.get("categoryLabel"), category.get("categoryID")]
+            )
 
     print(f"Data saved to {output_file_path}")
 
