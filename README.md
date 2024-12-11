@@ -118,7 +118,9 @@ We develop a module that filters products based on user inputs for category and 
 
 Because users may also specify wanted ingredients and unwanteded ingredients, we filter products that include the wanted ingredients and exclude the unwanted ingredients. 
 
-To make the following score computation process more efficient, we select the reviews based on the user's input for skin type and skin tone. If a product has reviewers whose skin type and skin tone match the user's inputs, only those matching reviews are retained in the dataframe. If no such matches are found, all reviews for that product are kept as data for further analysis. Through the above steps, we obtain a cleaned dataframe that serves as the input data for the next stage of analysis.
+To make the following score computation process more efficient, we select the reviews based on the user's input for skin type and skin tone. If a product has reviewers whose skin type and skin tone match the user's inputs, only those matching reviews are retained in the dataframe. If no such matches are found, all reviews for that product are kept as data for further analysis. 
+
+Through the above steps, we obtain a cleaned dataframe that serves as the input data for the next stage of analysis.
 
 ### Modeling:
 Here, we utilizes natural language processing (NLP) techniques and machine learning models to compute semantic similarities between user descriptions and product reviews, while also considering product ratings to enhance recommendations.
