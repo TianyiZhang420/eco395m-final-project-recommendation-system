@@ -11,7 +11,7 @@ The system enables users to specify their desired product attributes, such as pr
 - **4. Enhance Decision-Making**: Provide users with meaningful insights through sentiment analysis, product attributes, and customer reviews to support informed decision-making.
 
 ## A. Data Scraping
-***Source***
+***Source:***
 We leverage the Sephora API via Rapid API (https://rapidapi.com/Octapi/api/sephora14) to scrape data on skincare and makeup products. The scraping process is broken into four sequential scripts, each targeting specific data points. All scraped data (`product_info`, `product_reviews`) is stored in a PostgreSQL database hosted on Google Cloud Platform (GCP), which ensures efficient storage and scalability. We use DBeaver as the database client to manage and query the data during the development and analysis phases.
 
 ### 1. **Get Category ID**
