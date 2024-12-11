@@ -79,10 +79,7 @@ python3 run code/scraping/4_review.py
 This module provides visual and statistical insights into the dataset, focusing on product categories, ratings, reviews, and sentiment analysis. The EDA helps uncover patterns, relationships, and distributions in the data to better understand the dataset.
 
 ***Category Distribution***
-
-<div align="center">
-<img src="https://github.com/TianyiZhang420/eco395m-final-project-recommendation-system/blob/main/image/category_distribution.png" alt="Image Description" style="width:50%;height:auto;">
-</div>
+![](image/category_distribution.png)
 
  - **Dominance of Facial Makeup and Skincare**: Foundation makeup and mascara categories dominate in terms of product availability, indicating higher market focus.
  - **Limited Representation of Certain Categories**: Blush and sunscreen have significantly fewer products, which may indicate gaps in these markets.
@@ -98,7 +95,7 @@ This module provides visual and statistical insights into the dataset, focusing 
 - **Correlation Coefficient**: The coefficient is -0.02, indicating a near-zero and slightly negative relationship. This suggests that ratings and the number of reviews are almost independent of each other.
 - **Outliers**: Some products with mid-range ratings (e.g., ~4.0) have an exceptionally high number of reviews (>20,000), which may influence the overall distribution.
 
-![](image/correlation_analysis.png)
+
 ***Rating Distribution***
 
 
