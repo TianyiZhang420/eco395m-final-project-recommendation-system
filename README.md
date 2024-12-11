@@ -98,7 +98,7 @@ This module provides visual and statistical insights into the dataset, focusing 
 - **Correlation Coefficient**: The coefficient is -0.02, indicating a near-zero and slightly negative relationship. This suggests that ratings and the number of reviews are almost independent of each other.
 - **Outliers**: Some products with mid-range ratings (e.g., ~4.0) have an exceptionally high number of reviews (>20,000), which may influence the overall distribution.
 
-
+![](image/correlation_analysis.png)
 ***Rating Distribution***
 
 
