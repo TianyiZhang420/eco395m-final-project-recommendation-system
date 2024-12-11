@@ -174,7 +174,6 @@ Some dashboard highlights are as follows:
 
 The pictures below demonstrate an example of selecting sunscreens using our dashboard, along with the display of the recommended results:
 ![](image/dashboard_example_selection.png)
-![](image/dashboard_example_output.png)
 
 ## D. Limitations
 
