@@ -63,7 +63,7 @@ git clone git@github.com:TianyiZhang420/eco395m-final-project-recommendation-sys
 cd eco395m-final-project-recommendation-system
 pip install -r requirements.txt
 ```
-You should also get a Rapid API key, and set them as environment variables. Then you can run the following code to extract your own Sephora data:
+You should also get a Rapid API key, and set it in the code. Then you can run the following code to extract your own Sephora data:
 ```bash
 python3 run code/scraping/1_get_category.py
 python3 run code/scraping/2_get_productinfo.py
