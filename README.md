@@ -10,6 +10,9 @@ The system enables users to specify their desired product attributes, such as pr
 - **3. User-Friendly Interface**: Design an interactive Streamlit dashboard that allows users to specify preferences and access ranked product recommendations with ease.
 - **4. Enhance Decision-Making**: Provide users with meaningful insights through sentiment analysis, product attributes, and customer reviews to support informed decision-making.
 
+A brief workflow of our pipeline is provided below:
+<img width="1344" alt="image" src="https://github.com/user-attachments/assets/62cea8bf-e996-44e9-b6b2-fd0968c8a025" />
+
 ## A. Data Scraping
 ***Source:***
 We leverage the Sephora API via Rapid API (https://rapidapi.com/Octapi/api/sephora14) to scrape data on skincare and makeup products. The scraping process is broken into four sequential scripts, each targeting specific data points. All scraped data (`product_info`, `product_reviews`) is stored in a PostgreSQL database hosted on Google Cloud Platform (GCP), which ensures efficient storage and scalability. We use DBeaver as the database client to manage and query the data during the development and analysis phases.
@@ -71,9 +74,6 @@ python3 run code/scraping/2_get_productinfo.py
 python3 run code/scraping/3_product_detail.py
 python3 run code/scraping/4_review.py
 ```
-
-A brief workflow of our pipeline is provided below:
-<img width="1344" alt="image" src="https://github.com/user-attachments/assets/62cea8bf-e996-44e9-b6b2-fd0968c8a025" />
 
 
 ## B. Data Overview
