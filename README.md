@@ -32,7 +32,6 @@ We leverage the Sephora API via Rapid API (https://rapidapi.com/Octapi/api/sepho
   - reviews (The number of reviews)
 
 ### 3. **Fetch Product Details**
-3 run code/scraping/3_product_detail.py
 
 - Uses the **product IDs** obtained in the previous step to gather detailed information about each product, such as:
   - longDescription
