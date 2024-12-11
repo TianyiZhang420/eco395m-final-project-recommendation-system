@@ -64,6 +64,20 @@ python3 run code/scraping/4_review.py
   - skinType
   - hairColor
 
+**Execution method:** To execute the scraping code and get the cleaned `csv` file, you should first run the following codes from the terminal in order:
+```bash
+git clone
+cd eco395m-final-project-recommendation-system
+pip install -r requirements.txt
+```
+You should also get a Rapid API key, and set them as environment variables. Then you can run the following code to extract your own Sephora data:
+```bash
+python3 run code/scraping/1_get_category.py
+python3 run code/scraping/2_get_productinfo.py
+python3 run code/scraping/3_product_detail.py
+python3 run code/scraping/4_review.py
+```
+
 ## B. Data Overview
 
 ### Explorative Data Analysis(EDA)
