@@ -195,6 +195,6 @@ The pictures below demonstrate an example of selecting sunscreens using our dash
 * Our dashboard only displays selected product names and links to the websites, which might not be visually engaging from an UI/UX perspective.
 
 ## E. Further Plans
-* Integrate real-time data automatically from Sephora’s API using script management tools to provide updated product details on a regular basis. 
+* Integrate data automatically from Sephora’s API using script management tools to provide updated product details on a regular basis. 
 * Include the official product descriptions in the analyzed data, generate embeddings, and calculate their similarity to the user's input as part of the recommendation score.
 * Redesign output interface by adding elements includng but not limited to images, ratings, or other visual cues.
