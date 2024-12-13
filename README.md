@@ -1,4 +1,4 @@
-  # eco395m-final-project-recommendation-system
+  # Sephora Recommendation System
 ## Introduction
 In today’s rapidly growing e-commerce landscape, selecting the ideal product from a vast array of options can be overwhelming for consumers. This project focuses on building a recommendation system tailored to Sephora's skincare and makeup products, leveraging data scraped from Sephora's API via Rapid API. By combining advanced data scraping techniques, sentiment analysis, and natural language processing (NLP), we aim to provide personalized recommendations that cater to individual user preferences and needs.
 
