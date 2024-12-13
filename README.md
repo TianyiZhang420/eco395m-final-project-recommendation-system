@@ -4,7 +4,7 @@ In today’s rapidly growing e-commerce landscape, selecting the ideal product f
 
 The system enables users to specify their desired product attributes, such as price range, category, skin type, and preferred ingredients. Using semantic similarity and weighted scoring mechanisms, our recommendation system ranks products that best match user inputs. The interactive dashboard further simplifies the selection process, offering a wonderful experience for users to find products suited to their requirements.
 
-***Project Goals***
+***Specific Goals***
 - **1. Efficient Data Collection and Processing:** Develop a robust pipeline for scraping and processing product data, including categories, product details, and customer reviews, to build a comprehensive dataset.
 - **2. Personalized Product Recommendations:** Implement an intelligent recommendation system using machine learning and NLP to analyze user inputs and product reviews for semantic similarity and relevance.
 - **3. User-Friendly Interface**: Design an interactive Streamlit dashboard that allows users to specify preferences and access ranked product recommendations with ease.
